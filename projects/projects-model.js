@@ -12,7 +12,22 @@ const add = project => (
     ))
 )
 
+const findById = id => (
+  db('projects')
+    .where({ id })
+    .first()
+    .then(project => (
+      db('actions')
+        .where({ project_id: id })
+        .then(actions => {
+          project.actions = actions
+          return project
+        })
+    ))
+)
+
 module.exports = {
   find,
-  add
+  add,
+  findById
 }
