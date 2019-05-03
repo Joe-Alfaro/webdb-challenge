@@ -4,6 +4,15 @@ const find = () => (
   db('projects')
 );
 
+const add = project => (
+  db('projects')
+    .insert(project, 'id')
+    .then(() => (
+      db('projects') 
+    ))
+)
+
 module.exports = {
-  find
+  find,
+  add
 }

@@ -5,10 +5,10 @@ const Projects = require('./projects-model.js');
 router.get('/', (req, res) => {
   Projects 
     .find()
-    .then(dishes => {
+    .then(projects => {
       res
         .status(200)
-        .json(dishes)
+        .json(projects)
     })
     .catch(error => {
       res
@@ -16,5 +16,21 @@ router.get('/', (req, res) => {
         .json(error)
     })
 });
+
+router.post('/', (req, res) => {
+  newProject = req.body
+  Projects
+    .add(newProject)
+    .then(projects => {
+      res
+        .status(200)
+        .json(projects)
+    })
+    .catch(error => {
+      res
+        .status(500)
+        .json(error)
+    })
+})
 
 module.exports = router;
